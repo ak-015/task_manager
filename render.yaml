@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: taskmanager-backend
+    env: node
+    plan: free
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        fromDatabase:
+          name: taskmanager-db
+          property: connectionString
+
+  - type: web
+    name: taskmanager-frontend
+    env: node
+    plan: free
+    buildCommand: cd frontend && npm install && npm run build
+    startCommand: cd frontend && npm start
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://taskmanager-backend.onrender.com
+
+databases:
+  - name: taskmanager-db
+    plan: free
