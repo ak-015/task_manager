@@ -8,6 +8,8 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
+      - key: CLIENT_URL
+        value: https://task-manager-1-2xee.onrender.com
       - key: MONGODB_URI
         fromDatabase:
           name: taskmanager-db
